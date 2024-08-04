@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "i3_tools"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+i3ipc = "*"
+
+[tool.poetry.scripts]
+auto_orientation = "i3_tools:auto_orientation"
+auto_scratchpad = "i3_tools:auto_scratchpad"
+focus_or_open = "i3_tools:focus_or_open"
+focus_outermost_parent = "i3_tools:focus_outermost_parent"
+focus_sibling = "i3_tools:focus_sibling"
+fullscreen_mode = "i3_tools:fullscreen_mode"
+get_scratchpad_windows = "i3_tools:get_scratchpad_windows"
+on_workspace_init = "i3_tools:on_workspace_init"
+rotate_layout = "i3_tools:rotate_layout"
+time_tracker = "i3_tools:time_tracker"
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+# requires = ["setuptools"]
+# build-backend = "setuptools.build_meta"
