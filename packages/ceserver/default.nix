@@ -2,25 +2,32 @@
 , stdenv
 , fetchzip
 , gnumake
+, zlib
 }:
-let
-  cheat-engine-src = fetchzip {
-    url = "https://github.com/cheat-engine/cheat-engine/archive/refs/heads/master.zip";
-    sha256 = lib.fakeSha256;
-  };
-in
 stdenv.mkDerivation {
   pname = "cesever";
   version = "7.5";
-  src = "${cheat-engine-src}/Cheat Engine/ceserver";
+  src = fetchzip {
+    url = "https://github.com/cheat-engine/cheat-engine/archive/refs/heads/master.zip";
+    sha256 = "sha256-zurEnu4YDGZDyvWSejzqZ/vlMpLUigp2Yj6t2qp3RZg=";
+  };
   nativeBuildInputs = [ gnumake ];
 
+  buildInputs = [ zlib ];
+
   buildPhase = ''
-    cd gcc
+    cd "Cheat Engine/ceserver/gcc"
     make
   '';
 
   installPhase = ''
-    ls -la
+    mkdir -p $out/bin
+    mv ceserver $out/bin
   '';
+
+  meta = with lib; {
+    description = "Cheat Engine Server";
+    homepage = "https://www.cheatengine.org/";
+    mainProgram = "ceserver";
+  };
 }
